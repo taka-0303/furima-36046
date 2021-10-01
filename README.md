@@ -23,7 +23,7 @@ has_many :purchases
 | text          | text       | null: false                   |
 | category_id   | integer    | null: false                   |
 | condition_id  | integer    | null: false                   |
-| Commission_id | integer    | null: false                   |
+| commission_id | integer    | null: false                   |
 | area_id       | integer    | null: false                   |
 | delivery_id   | integer    | null: false                   |
 | price         | integer    | null: false                   |
@@ -49,7 +49,7 @@ has_one :shipping_info
 
 | Column           | Type       | Option                         |
 | ---------------- | ---------- | ------------------------------ |
-| Postal_code      | string     | null: false                    |
+| postal_code      | string     | null: false                    |
 | area_id          | integer    | null: false                    |
 | municipalities   | string     | null: false                    |
 | address          | string     | null: false                    |
