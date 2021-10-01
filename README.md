@@ -1,35 +1,33 @@
 ## usersテーブル
 
-| Column            | Type   | Option      |
-| ----------------- | ------ | ----------- |
-| email             | string | null: false |
-| encrypted_password| string | null: false |
-| nickname          | string | null: false |
-| last_name         | string | null: false |
-| first_name        | string | null: false |
-| last_name_read    | string | null: false |
-| first_name_read   | string | null: false |
-| birth_year        | integer| null: false |
-| birth_month       | integer| null: false |
-| birth_day         | integer| null: false |
+| Column            | Type   | Option                    |
+| ----------------- | ------ | ------------------------- |
+| email             | string | null: false, unique: true |
+| encrypted_password| string | null: false               |
+| nickname          | string | null: false               |
+| last_name         | string | null: false               |
+| first_name        | string | null: false               |
+| last_name_read    | string | null: false               |
+| first_name_read   | string | null: false               |
+| birth_day         | data   | null: false               |
 
 ### Association
 has_many :items
-has_many :purchase
+has_many :purchases
 
 ## itemsテーブル
 
-| Column     | Type       | Option      |
-| ---------- | ---------- | ----------- |
-| image      |            |             |
-| item_name  | string     | null: false |
-| text       | text       | null: false |
-| category   | integer    | null: false |
-| condition  | integer    | null: false |
-| area       | integer    | null: false |
-| delivery   | integer    | null: false |
-| price      | integer    | null: false |
-| user       | references |             |
+| Column        | Type       | Option                        |
+| ------------- | ---------- | ----------------------------- |
+| item_name     | string     | null: false                   |
+| text          | text       | null: false                   |
+| category_id   | integer    | null: false                   |
+| condition_id  | integer    | null: false                   |
+| Commission_id | integer    | null: false                   |
+| area_id       | integer    | null: false                   |
+| delivery_id   | integer    | null: false                   |
+| price         | integer    | null: false                   |
+| user          | references | null: false, foreign_key: true|
 
 ### Association
 belongs_to :user
@@ -37,10 +35,10 @@ has_one :purchase
 
 ## purchaseテーブル
 
-| Column     | Type       | Option      |
-| ---------- | ---------- | ----------- |
-| user       | references |             |
-| item       | references |             |
+| Column     | Type       | Option                         |
+| ---------- | ---------- | ------------------------------ |
+| user       | references | null: false, foreign_key: true |
+| item       | references | null: false, foreign_key: true |
 
 ### Association
 belongs_to :user
@@ -49,14 +47,15 @@ has_one :shipping_info
 
 ## shipping_infoテーブル
 
-| Column           | Type       | Option      |
-| ---------------- | ---------- | ----------- |
-| Postal_code      | string     | null: false |
-| area             | integer    | null: false |
-| municipalities   | string     | null: false |
-| address          | string     | null: false |
-| building_name    | string     |             |
-| telephone_number | string     | null: false |
-| purchase         | references |             |
+| Column           | Type       | Option                         |
+| ---------------- | ---------- | ------------------------------ |
+| Postal_code      | string     | null: false                    |
+| area_id          | integer    | null: false                    |
+| municipalities   | string     | null: false                    |
+| address          | string     | null: false                    |
+| building_name    | string     |                                |
+| telephone_number | string     | null: false                    |
+| purchase         | references | null: false, foreign_key: true |
+
 ### Association
 belongs_to :purchase
