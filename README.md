@@ -9,7 +9,7 @@
 | first_name        | string | null: false               |
 | last_name_read    | string | null: false               |
 | first_name_read   | string | null: false               |
-| birth_day         | data   | null: false               |
+| birth_day         | date   | null: false               |
 
 ### Association
 has_many :items
