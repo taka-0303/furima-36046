@@ -60,19 +60,19 @@ RSpec.describe User, type: :model do
       it 'password:半角英数混合(半角英語のみ)' do
         @user.password = 'aaaaaaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+        expect(@user.errors.full_messages).to include("Password は半角英数字混合にしてください")
       end
 
       it '数字のみのパスワードでは登録できない' do
         @user.password = '0000000'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+        expect(@user.errors.full_messages).to include("Password は半角英数字混合にしてください")
       end
 
       it '全角文字を含むパスワードでは登録できない' do
-        @user.password = 'AAAA000'
+        @user.password = '@@@@@@@'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+        expect(@user.errors.full_messages).to include("Password は半角英数字混合にしてください")
       end
 
       it 'last_nameが空では登録できない' do

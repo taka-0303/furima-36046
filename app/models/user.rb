@@ -14,5 +14,8 @@ class User < ApplicationRecord
     validates :first_name_read, presence: true
   end
   validates :birth_day, presence: true
-  
+
+  VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
+  validates :password, format: { with: VALID_PASSWORD_REGEX, message: 'は半角英数字混合にしてください'}
 end
+
