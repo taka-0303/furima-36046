@@ -10,13 +10,14 @@ class Item < ApplicationRecord
   belongs_to :area
   belongs_to :delivery
 
-  validates :item_name, :string, null: false 
-  validates :text, :text, null: false
-  validates :category_id, :integer, null: false, numericality: { other_than: 1 }
-  validates :condition_id, :integer, null: false, numericality: { other_than: 1 }
-  validates :commission_id, :integer, null: false, numericality: { other_than: 1 }
-  validates :area_id, :integer, null: false, numericality: { other_than: 1 }
-  validates :delivery_id, :integer, null: false, numericality: { other_than: 1 }
-  validates :price, :integer, null: false
-  validates :user_id, presence: true
+  validates :image,          presence: true
+  validates :item_name,      null: false 
+  validates :text,           null: false
+  validates :category_id,    null: false, numericality: { other_than: 1 }
+  validates :condition_id,   null: false, numericality: { other_than: 1 }
+  validates :commission_id,  null: false, numericality: { other_than: 1 }
+  validates :area_id,        null: false, numericality: { other_than: 1 }
+  validates :delivery_id,    null: false, numericality: { other_than: 1 }
+  validates :price,          null: false
+  validates :user_id,        presence: true
 end
