@@ -11,13 +11,12 @@ class Item < ApplicationRecord
   belongs_to :delivery
 
   validates :image,          presence: true
-  validates :item_name,      null: false 
-  validates :text,           null: false
-  validates :category_id,    null: false, numericality: { other_than: 1 }
-  validates :condition_id,   null: false, numericality: { other_than: 1 }
-  validates :commission_id,  null: false, numericality: { other_than: 1 }
-  validates :area_id,        null: false, numericality: { other_than: 1 }
-  validates :delivery_id,    null: false, numericality: { other_than: 1 }
-  validates :price,          null: false
-  validates :user_id,        presence: true
+  validates :item_name,      presence: true
+  validates :text,           presence: true
+  validates :category_id,    presence: true, numericality: { other_than: 1 }
+  validates :condition_id,   presence: true, numericality: { other_than: 1 }
+  validates :commission_id,  presence: true, numericality: { other_than: 1 }
+  validates :area_id,        presence: true, numericality: { other_than: 1 }
+  validates :delivery_id,    presence: true, numericality: { other_than: 1 }
+  validates :price,          presence: true, inclusion: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/ }
 end
