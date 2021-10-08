@@ -6,9 +6,8 @@ window.addEventListener('load', () => {
   priceInput.addEventListener("input", () => {
     const inputValue = priceInput.value;
 
-    console.log(inputValue);
     addTaxDom.innerHTML = `${Math.floor(inputValue / 10)}`;
-    
+
     const taxResult = addTaxDom.innerHTML;
     profitRate.innerHTML = `${(inputValue - taxResult)}`;
   });
