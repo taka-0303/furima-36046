@@ -70,14 +70,12 @@ RSpec.describe Item, type: :model do
       it '価格は¥300~¥9,999,999以外は登録できない' do
         @item.price = 100
         @item.valid?
-        binding.pry
         expect(@item.errors.full_messages).to include("Price is not included in the list")
       end
 
       it '価格は半角数値でないと登録できない' do
         @item.price = '@@@@'
         @item.valid?
-        binding.pry
         expect(@item.errors.full_messages).to include("Price is not included in the list")
       end
   end
