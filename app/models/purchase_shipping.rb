@@ -1,12 +1,11 @@
 class PurchaseShipping
-  extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :area
+  
 
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postal_code, :area_id, :municipalities, :address, :cuilding, :telephone_number, :purchase_id
+  attr_accessor :user_id, :item_id, :postal_code, :area_id, :municipalities, :address, :building_name, :cuilding, :telephone_number
 
-  validates :user_id, purchase: true
-  validates :item_id, purchase: true
+  validates :user_id, presence: true
+  validates :item_id, presence: true
   validates :postal_code,      presence: true, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
   validates :area_id,          presence: true, numericality: { other_than: 1 }
   validates :municipalities,   presence: true
