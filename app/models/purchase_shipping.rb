@@ -10,7 +10,7 @@ class PurchaseShipping
   validates :area_id,          presence: true, numericality: { other_than: 1 }
   validates :municipalities,   presence: true
   validates :address,          presence: true
-  validates :telephone_number, presence: true
+  validates :telephone_number, presence: true, format: {with: /\A(\d{10})|(\d{11})\z/, message: "is invalid. Do not include hyphens (-)"}
 
   def save
     purchase = Purchase.create(user_id: user_id, item_id: item_id)
