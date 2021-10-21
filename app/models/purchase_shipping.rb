@@ -4,6 +4,7 @@ class PurchaseShipping
   include ActiveModel::Model
   attr_accessor :user_id, :item_id, :postal_code, :area_id, :municipalities, :address, :building_name, :cuilding, :telephone_number, :token
 
+  validates :token ,presence: true
   validates :user_id, presence: true
   validates :item_id, presence: true
   validates :postal_code,      presence: true, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
