@@ -1,13 +1,13 @@
 class PurchasesController < ApplicationController
+  before_action :set_item, only: [:index, :create]
+  before_action :authenticate_user!, only: :index
   before_action :index_to_move, only: :index
   
   def index
     @purchase_shipping = PurchaseShipping.new
-    @item = Item.find(params[:item_id,])
   end
 
   def create
-    @item = Item.find(params[:item_id,])
     @purchase_shipping = PurchaseShipping.new(purchase_params)
     if @purchase_shipping.valid?
       pay_item
@@ -19,6 +19,10 @@ class PurchasesController < ApplicationController
   end
 
   private
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
 
   def purchase_params
     params.require(:purchase_shipping).permit(:postal_code, :area_id, :municipalities, :address, :building_name, :telephone_number).merge(user_id: current_user.id, item_id: @item.id, token: params[:token])
@@ -34,7 +38,6 @@ class PurchasesController < ApplicationController
   end
 
   def index_to_move
-    @item = Item.find(params[:item_id,])
-    redirect_to root_path unless user_signed_in? && @item.purchase.blank? && current_user =! @item.user
+    redirect_to root_path unless @item.purchase.blank? && current_user =! @item.user
   end
 end

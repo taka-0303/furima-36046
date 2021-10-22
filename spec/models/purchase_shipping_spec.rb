@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe PurchaseShipping, type: :model do
   before do
     user = FactoryBot.create(:user)
+    item = FactoryBot.build(:item)
     @purchase_shipping = FactoryBot.build(:purchase_shipping, user_id: user.id, item_id: :item)
   end
 
@@ -19,6 +20,17 @@ RSpec.describe PurchaseShipping, type: :model do
     end
 
     context '購入情報登録できない場合' do
+      it 'user_idが空では登録できない' do
+        @purchase_shipping.user_id = nil
+        @purchase_shipping.valid?
+        expect(@purchase_shipping.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'item_idが空では登録できない' do
+        @purchase_shipping.item_id = nil
+        @purchase_shipping.valid?
+        expect(@purchase_shipping.errors.full_messages).to include("Item can't be blank")
+      end
       it 'tokenが空では登録できない' do
         @purchase_shipping.token = nil
         @purchase_shipping.valid?
@@ -68,6 +80,18 @@ RSpec.describe PurchaseShipping, type: :model do
 
       it '電話番号にハイフンがあると登録できない' do
         @purchase_shipping.telephone_number = '090-1234-5678'
+        @purchase_shipping.valid?
+        expect(@purchase_shipping.errors.full_messages).to include("Telephone number is invalid. Do not include hyphens (-)")
+      end
+
+      it '電話番号が９桁以下では登録できない' do
+        @purchase_shipping.telephone_number = '090123456'
+        @purchase_shipping.valid?
+        expect(@purchase_shipping.errors.full_messages).to include("Telephone number is invalid. Do not include hyphens (-)")
+      end
+
+      it '電話番号が12桁以上では登録できない' do
+        @purchase_shipping.telephone_number = '090123456789'
         @purchase_shipping.valid?
         expect(@purchase_shipping.errors.full_messages).to include("Telephone number is invalid. Do not include hyphens (-)")
       end
