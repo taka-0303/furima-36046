@@ -1,12 +1,13 @@
 class PurchasesController < ApplicationController
+  before_action :index_to_move, only: :index
   
   def index
     @purchase_shipping = PurchaseShipping.new
-    @item = Item.find(params[:item_id])
+    @item = Item.find(params[:item_id,])
   end
 
   def create
-    @item = Item.find(params[:item_id])
+    @item = Item.find(params[:item_id,])
     @purchase_shipping = PurchaseShipping.new(purchase_params)
     if @purchase_shipping.valid?
       pay_item
@@ -30,5 +31,10 @@ class PurchasesController < ApplicationController
         card: purchase_params[:token],
         currency: 'jpy' 
       )
+  end
+
+  def index_to_move
+    @item = Item.find(params[:item_id,])
+    redirect_to root_path unless user_signed_in? && @item.purchase.blank? && current_user =! @item.user
   end
 end
