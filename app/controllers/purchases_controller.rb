@@ -38,6 +38,6 @@ class PurchasesController < ApplicationController
   end
 
   def index_to_move
-    redirect_to root_path unless @item.purchase.blank? && current_user =! @item.user
+    redirect_to root_path unless @item.purchase.blank? && current_user != @item.user
   end
 end
